@@ -27,34 +27,34 @@ This project simulates setting up an Active Directory (AD) environment with a Do
 ---
 
 <h2 id="lab-overview">Lab Overview</h2>
-This lab models a basic enterprise IT environment with:
-- A Domain Controller for centralized management
-- Network Address Translation (NAT) for internet access
-- A DHCP server for IP address allocation
-- Active Directory for managing users and computers
-- A virtual Windows 10 client connected to the domain
+This lab models a basic enterprise IT environment with:<br />
+- A Domain Controller for centralized management<br />
+- Network Address Translation (NAT) for internet access<br />
+- A DHCP server for IP address allocation<br />
+- Active Directory for managing users and computers<br />
+- A virtual Windows 10 client connected to the domain<br />
 
 ---
 
 <h2 id="prerequisites">Prerequisites</h2>
-- A virtualized environment using VMware, VirtualBox, or Hyper-V
-- Access to Windows Server ISO and Windows 10 Pro ISO
-- Diagram for the network configuration (IP addressing, subnets, and routing)
-- Basic knowledge of Active Directory, DNS, DHCP, and NAT
+- A virtualized environment using VMware, VirtualBox, or Hyper-V<br />
+- Access to Windows Server ISO and Windows 10 Pro ISO<br />
+- Diagram for the network configuration (IP addressing, subnets, and routing)<br />
+- Basic knowledge of Active Directory, DNS, DHCP, and NAT<br />
 
 ---
 
 <h2 id="setup-steps">Setup Steps</h2>
 
 <h3 id="1-configure-the-domain-controller-dc-server">1. Configure the Domain Controller (DC) Server</h3>
-1. **Set up IP addressing**:
-   - Open network settings and go to **Change Adapter Options**.
-   - Identify the two network connections (one for internet, one for the internal network).
-   - Rename the internet connection (e.g., `Internet`).
-   - Assign a static IP to the internal connection:
-     - IP Address: `172.16.0.1`
-     - Subnet Mask: `255.255.255.0`
-     - DNS Server: `127.0.0.1` (loopback)
+1. **Set up IP addressing**:<br />
+   - Open network settings and go to **Change Adapter Options**.<br />
+   - Identify the two network connections (one for internet, one for the internal network).<br />
+   - Rename the internet connection (e.g., `Internet`).<br />
+   - Assign a static IP to the internal connection:<br />
+     - IP Address: `172.16.0.1`<br />
+     - Subnet Mask: `255.255.255.0`<br />
+     - DNS Server: `127.0.0.1` (loopback)<br />
 
 2. **Enable internal and external communication**:
    - Ensure the internal network is configured correctly and NAT is set up later for routing.
@@ -62,15 +62,15 @@ This lab models a basic enterprise IT environment with:
 ---
 
 <h3 id="2-rename-the-system">2. Rename the System</h3>
-1. Rename the machine to `DC` for better organization.
-2. Right-click Start, go to **System**, and rename the system.
+1. Rename the machine to `DC` for better organization.<br />
+2. Right-click Start, go to **System**, and rename the system.<br />
 
 ---
 
 <h3 id="3-create-the-domain-and-configure-ad-ds">3. Create the Domain and Configure AD DS</h3>
-1. **Install Active Directory Domain Services**:
-   - Open **Server Manager** > **Add Roles and Features**.
-   - Select **Active Directory Domain Services (AD DS)** and install.
+1. **Install Active Directory Domain Services**:<br />
+   - Open **Server Manager** > **Add Roles and Features**.<br />
+   - Select **Active Directory Domain Services (AD DS)** and install.<br />
 
 2. **Promote the server to a Domain Controller**:
    - Click the flag in the top-right corner and select **Promote this server to a domain controller**.
@@ -84,17 +84,17 @@ This lab models a basic enterprise IT environment with:
 ---
 
 <h3 id="4-create-a-dedicated-domain-admin-account">4. Create a Dedicated Domain Admin Account</h3>
-1. Open **Active Directory Users and Computers**.
-2. Create an Organizational Unit (OU) named `_ADMINS`.
-3. Add a new user in the `_ADMINS` OU:
-   - Assign the user to the **Domain Admins** group for elevated permissions.
+1. Open **Active Directory Users and Computers**.<br />
+2. Create an Organizational Unit (OU) named `_ADMINS`.<br />
+3. Add a new user in the `_ADMINS` OU:<br />
+   - Assign the user to the **Domain Admins** group for elevated permissions.<br />
 
 ---
 
 <h3 id="5-install-and-configure-rasnat">5. Install and Configure RAS/NAT</h3>
-1. **Install Remote Access Services**:
-   - Go to **Add Roles and Features** > Select **Remote Access**.
-   - Include the **DirectAccess and VPN** and **Routing** services.
+1. **Install Remote Access Services**:<br />
+   - Go to **Add Roles and Features** > Select **Remote Access**.<br />
+   - Include the **DirectAccess and VPN** and **Routing** services.<br />
 
 2. **Configure NAT**:
    - Open **Routing and Remote Access**.
@@ -114,36 +114,36 @@ This lab models a basic enterprise IT environment with:
 ---
 
 <h3 id="7-configure-internet-access-for-lab-use-only">7. Configure Internet Access (For Lab Use Only)</h3>
-1. Disable **IE Enhanced Security Configuration** via **Server Manager**.
+1. Disable **IE Enhanced Security Configuration** via **Server Manager**.<br />
 2. Enable NAT to allow internet access for lab purposes.
 
 ---
 
 <h3 id="8-automate-user-creation-with-powershell">8. Automate User Creation with PowerShell</h3>
-1. Download a PowerShell script for automated user creation:
-   - URL: [AD_PS GitHub Repository](https://github.com/joshmadakor1/AD_PS)
+1. Download a PowerShell script for automated user creation:<br />
+   - URL: [AD_PS GitHub Repository](https://github.com/joshmadakor1/AD_PS)<br />
 2. Run the script in PowerShell to create sample users in bulk.
 
 ---
 
 <h3 id="9-configure-a-virtual-client-machine">9. Configure a Virtual Client Machine</h3>
-1. Set up a Windows 10 Pro VM.
+1. Set up a Windows 10 Pro VM.<br />
 2. Connect it to the internal network.
 
 ---
 
 <h3 id="10-connect-the-client-to-the-domain">10. Connect the Client to the Domain</h3>
-1. Assign an IP from the DHCP server.
-2. Join the domain via **System Properties**.
+1. Assign an IP from the DHCP server.<br />
+2. Join the domain via **System Properties**.<br />
 3. Verify the client appears under Active Directory Computers.
 
 ---
 
 <h2 id="testing">Testing</h2>
-1. Verify the client can:
-   - Access the internet via NAT.
-   - Communicate with the Domain Controller.
-   - Ping external sites (e.g., `google.com`).
+1. Verify the client can:<br />
+   - Access the internet via NAT.<br />
+   - Communicate with the Domain Controller.<br />
+   - Ping external sites (e.g., `google.com`).<br />
 2. Ensure the domain admin account has full permissions.
 
 ---
