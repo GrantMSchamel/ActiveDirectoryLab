@@ -33,7 +33,9 @@ This lab models a basic enterprise IT environment with:<br />
 - A DHCP server for IP address allocation<br />
 - Active Directory for managing users and computers<br />
 - A virtual Windows 10 client connected to the domain<br />
-(https://imgur.com/a/LAVJd0j)
+
+![Architecture Diagram](https://i.imgur.com/rEoYjIh.png)
+
 ---
 
 <h2 id="prerequisites">Prerequisites</h2>
@@ -55,6 +57,8 @@ This lab models a basic enterprise IT environment with:<br />
      - IP Address: `172.16.0.1`<br />
      - Subnet Mask: `255.255.255.0`<br />
      - DNS Server: `127.0.0.1` (loopback)<br />
+     
+![Network Config](https://i.imgur.com/bpYDQsQ.png)
 
 2. **Enable internal and external communication**:
    - Ensure the internal network is configured correctly and NAT is set up later for routing.
@@ -72,6 +76,8 @@ This lab models a basic enterprise IT environment with:<br />
    - Open **Server Manager** > **Add Roles and Features**.<br />
    - Select **Active Directory Domain Services (AD DS)** and install.<br />
 
+![AD DS Download](https://i.imgur.com/0IClu5o.png)
+
 2. **Promote the server to a Domain Controller**:
    - Click the flag in the top-right corner and select **Promote this server to a domain controller**.
    - Choose **Add a new forest** and set the Root Domain Name (e.g., `mydomain.com`).
@@ -81,13 +87,25 @@ This lab models a basic enterprise IT environment with:<br />
    - Restart the server to complete the promotion.
    - Confirm AD DS and DNS roles appear in the Server Manager Dashboard.
 
+![AD DS and DNS](https://i.imgur.com/3HqJyVt.png)
+
 ---
 
 <h3 id="4-create-a-dedicated-domain-admin-account">4. Create a Dedicated Domain Admin Account</h3>
 1. Open **Active Directory Users and Computers**.<br />
+
+![Active Directory](https://i.imgur.com/E9XiYEB.png)
+
 2. Create an Organizational Unit (OU) named `_ADMINS`.<br />
+
+![Admin Folder](https://i.imgur.com/6ZrzuSu.png)
+
 3. Add a new user in the `_ADMINS` OU:<br />
    - Assign the user to the **Domain Admins** group for elevated permissions.<br />
+
+![Add to Domain](https://i.imgur.com/yCOvgyO.png)
+
+![Show is Admin](https://i.imgur.com/Cna2zGM.png)
 
 ---
 
@@ -96,20 +114,29 @@ This lab models a basic enterprise IT environment with:<br />
    - Go to **Add Roles and Features** > Select **Remote Access**.<br />
    - Include the **DirectAccess and VPN** and **Routing** services.<br />
 
+![Roles](https://i.imgur.com/Hj0rhMI.png)
+
 2. **Configure NAT**:
-   - Open **Routing and Remote Access**.
-   - Right-click the server > **Configure and Enable** > Select **Network Address Translation (NAT)**.
-   - Assign the public interface (internet connection).
+   - Open **Routing and Remote Access**.<br />
+![Routing Wizard](https://i.imgur.com/ltiYkfV.png)<br />
+   - Right-click the server > **Configure and Enable** > Select **Network Address Translation (NAT)**.<br />
+![Select Internet](https://i.imgur.com/fPYVrv5.png)<br />
+   - Assign the public interface (internet connection).<br />
+  
+![Show NAT Wizard](https://i.imgur.com/XpJkhZG.png)<br />
 
 ---
 
 <h3 id="6-setup-dhcp-server">6. Setup DHCP Server</h3>
-1. Install the DHCP role via **Add Roles and Features**.
+1. Install the DHCP role via **Add Roles and Features**.<br />
 
-2. **Create a DHCP Scope**:
-   - Define a range of IPs (e.g., `172.16.0.100 - 172.16.0.200`).
-   - Use `172.16.0.1` as the default gateway.
-   - Activate the scope and ensure IPv4 is operational.
+2. **Create a DHCP Scope**:<br />
+![DHCP Range](https://i.imgur.com/BkGGCeC.png)<br />
+   - Define a range of IPs (e.g., `172.16.0.100 - 172.16.0.200`).<br />
+   - Use `172.16.0.1` as the default gateway.<br />
+   - Activate the scope and ensure IPv4 is operational.<br />
+![DHCP Config](https://i.imgur.com/lqk6eYF.png)<br />
+
 
 ---
 
@@ -117,18 +144,29 @@ This lab models a basic enterprise IT environment with:<br />
 1. Disable **IE Enhanced Security Configuration** via **Server Manager**.<br />
 2. Enable NAT to allow internet access for lab purposes.
 
+![DHCP Working](https://i.imgur.com/aqKRxEl.png)<br />
+
 ---
 
 <h3 id="8-automate-user-creation-with-powershell">8. Automate User Creation with PowerShell</h3>
 1. Download a PowerShell script for automated user creation:<br />
    - URL: [AD_PS GitHub Repository](https://github.com/joshmadakor1/AD_PS)<br />
+
+![Script](https://i.imgur.com/oZiihrn.png)<br />
+
 2. Run the script in PowerShell to create sample users in bulk.
+
+![Script Complete](https://i.imgur.com/dAhgmHU.png)<br />
 
 ---
 
 <h3 id="9-configure-a-virtual-client-machine">9. Configure a Virtual Client Machine</h3>
 1. Set up a Windows 10 Pro VM.<br />
 2. Connect it to the internal network.
+
+![Connected](https://i.imgur.com/b28NAhU.png)<br />
+
+![Connected](https://i.imgur.com/KUIZtG2.png)<br />
 
 ---
 
@@ -137,6 +175,8 @@ This lab models a basic enterprise IT environment with:<br />
 2. Join the domain via **System Properties**.<br />
 3. Verify the client appears under Active Directory Computers.
 
+![Verify](https://i.imgur.com/cgLWzhd.png)<br />
+
 ---
 
 <h2 id="testing">Testing</h2>
@@ -144,8 +184,12 @@ This lab models a basic enterprise IT environment with:<br />
    - Access the internet via NAT.<br />
    - Communicate with the Domain Controller.<br />
    - Ping external sites (e.g., `google.com`).<br />
-2. Ensure the domain admin account has full permissions.
 
+![Test](https://i.imgur.com/JevytG4.png)<br />
+
+2. Ensure the domain admin account has full permissions.<br />
+![Access](https://i.imgur.com/qpoDdj6.png)<br />
+When the user logs into their account, they have access to the users specific permissions from the Domain.<br />
 ---
 
 <h2 id="conclusion">Conclusion</h2>
