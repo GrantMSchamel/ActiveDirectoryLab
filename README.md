@@ -7,22 +7,22 @@ This project simulates setting up an Active Directory (AD) environment with a Do
 ---
 
 <h2>Table of Contents</h2>
-1. [Lab Overview](#lab-overview)<br />
-2. [Prerequisites](#prerequisites)<br />
-3. [Setup Steps](#setup-steps)<br />
-   - [1. Configure the Domain Controller (DC) Server](#1-configure-the-domain-controller-dc-server)<br />
-   - [2. Rename the System](#2-rename-the-system)<br />
-   - [3. Create the Domain and Configure AD DS](#3-create-the-domain-and-configure-ad-ds)<br />
-   - [4. Create a Dedicated Domain Admin Account](#4-create-a-dedicated-domain-admin-account)<br />
-   - [5. Install and Configure RAS/NAT](#5-install-and-configure-rasnat)<br />
-   - [6. Setup DHCP Server](#6-setup-dhcp-server)<br />
-   - [7. Configure Internet Access (For Lab Use Only)](#7-configure-internet-access-for-lab-use-only)<br />
-   - [8. Automate User Creation with PowerShell](#8-automate-user-creation-with-powershell)<br />
-   - [9. Configure a Virtual Client Machine](#9-configure-a-virtual-client-machine)<br />
-   - [10. Connect the Client to the Domain](#10-connect-the-client-to-the-domain)<br />
-4. [Testing](#testing)<br />
-5. [Conclusion](#conclusion)<br />
-6. [Resources](#resources)<br />
+1. [Lab Overview]<br />
+2. [Prerequisites]<br />
+3. [Setup Steps]<br />
+   - [1. Configure the Domain Controller (DC) Server]<br />
+   - [2. Rename the System]<br />
+   - [3. Create the Domain and Configure AD DS]<br />
+   - [4. Create a Dedicated Domain Admin Account]<br />
+   - [5. Install and Configure RAS/NAT]<br />
+   - [6. Setup DHCP Server]<br />
+   - [7. Configure Internet Access (For Lab Use Only)]<br />
+   - [8. Automate User Creation with PowerShell]<br />
+   - [9. Configure a Virtual Client Machine]<br />
+   - [10. Connect the Client to the Domain]<br />
+4. [Testing]<br />
+5. [Conclusion]<br />
+6. [Resources]<br />
 
 ---
 
