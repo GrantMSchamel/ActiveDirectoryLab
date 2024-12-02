@@ -33,7 +33,7 @@ This lab models a basic enterprise IT environment with:<br />
 - A DHCP server for IP address allocation<br />
 - Active Directory for managing users and computers<br />
 - A virtual Windows 10 client connected to the domain<br />
-
+(https://imgur.com/a/LAVJd0j)
 ---
 
 <h2 id="prerequisites">Prerequisites</h2>
